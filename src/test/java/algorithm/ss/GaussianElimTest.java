@@ -14,6 +14,7 @@ public class GaussianElimTest {
                 {0, 1, 1}
         });
         assert(ge != null);
+        assertTrue(true);
     }
 
 }
