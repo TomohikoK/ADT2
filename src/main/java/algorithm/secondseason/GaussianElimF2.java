@@ -1,4 +1,4 @@
-package algorithm.ss;
+package algorithm.secondseason;
 
 public class GaussianElimF2 {
 
@@ -6,21 +6,22 @@ public class GaussianElimF2 {
      * @param args
      */
     public static void main(String[] args) {
-        // execute(getMatrix(2));
-        // execute(getMatrix(3));
-        execute(getMatrix(4));
+        execute(createLMatrix(2));
+        execute(createLMatrix(3));
+        execute(createLMatrix(4));
+        execute(createLMatrix(5));
     }
 
-    static int[][] getMatrix(int n) {
+    static int[][] createLMatrix(int n) {
         int[][] result = new int[n * n][n * n];
 
         for (int i = 0; i < result.length; ++i) {
             for (int j = 0; j < result[i].length; ++j) {
-                if ((j == i - n) ||
-                        (i % n != 0 && j == i - 1) ||
-                        (j == i) ||
-                        (i % n != n - 1 && j == i + 1) ||
-                        (j == i + n))
+                if ((j == i - n) || // 上隣
+                        (i % n != 0 && j == i - 1) || // 左隣
+                        (j == i) || // 中心
+                        (i % n != n - 1 && j == i + 1) || // 右隣
+                        (j == i + n)) // 下隣
                     result[i][j] = 1;
                 else
                     result[i][j] = 0;
@@ -34,10 +35,8 @@ public class GaussianElimF2 {
         System.out.println("L_" + (int) Math.sqrt(matrix.length));
         display(matrix);
         int[][] augmentedMatrix = augmentMatrix(matrix);
-        // display(augmentedMatrix);
         eliminate(augmentedMatrix);
         display(augmentedMatrix);
-//        int[][] inverse = cutRightHalf(augmentedMatrix);
     }
 
     static int[][] augmentMatrix(int[][] matrix) {
@@ -68,9 +67,7 @@ public class GaussianElimF2 {
                 continue;
 
             swapRows(matrix, pivotIdx, rowIdx);
-            // display(matrix);
             eliminateOtherRows(matrix, rowIdx, colIdx);
-            // display(matrix);
             ++rowIdx;
         }
     }
@@ -96,8 +93,6 @@ public class GaussianElimF2 {
 
     static void eliminateOtherRows(int[][] matrix, int rowIdx, int colIdx) {
         for (int i = 0; i < matrix.length; ++i) {
-            // System.out.println("eliminating row of index: " + i);
-            // display(matrix);
             if (i == rowIdx)
                 continue;
             if (matrix[i][colIdx] == 0)
@@ -109,20 +104,6 @@ public class GaussianElimF2 {
         display(matrix);
     }
 
-    /*
-    private static int[][] cutRightHalf(int[][] augmentedMatrix) {
-        int size = augmentedMatrix.length;
-                  int[][] result = new int[size][size];
-        
-        for (int rowIdx = 0; rowIdx < size; ++rowIdx) {
-            for (int colIdx = 0; colIdx < size; ++colIdx) {
-                
-            }
-        }
-        return null;
-    }
-     */
-    
     static void display(int[][] matrix) {
         for (int i = 0; i < matrix.length; ++i) {
             for (int j = 0; j < matrix[i].length; ++j) {

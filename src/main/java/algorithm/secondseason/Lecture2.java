@@ -1,4 +1,4 @@
-package algorithm.ss;
+package algorithm.secondseason;
 
 public class Lecture2 {
 

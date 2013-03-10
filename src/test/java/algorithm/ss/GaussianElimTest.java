@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import algorithm.secondseason.GaussianElim;
+
 public class GaussianElimTest {
 
     @Test
