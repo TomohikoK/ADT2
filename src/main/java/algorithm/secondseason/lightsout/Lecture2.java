@@ -1,4 +1,4 @@
-package algorithm.secondseason;
+package algorithm.secondseason.lightsout;
 
 public class Lecture2 {
 
