@@ -1,31 +1,39 @@
 package algorithm.secondseason.random;
 
-import java.util.Random;
-
 public class CongruentMethod {
 
-    public static void main(String[] args) {
-        Random random = new Random(0);
-        random.nextInt();
-        
-        int seed = 0;
-        int previous = seed;
-        for (int i = 0; i < 1000; ++i) {
-            int current = next(previous);
-            System.out.printf("%d %d\n", previous, current);
-            previous = current;
-        }
+    private static final int MULTIPLICAND = 11;
+    private static final int ADDEND = 6;
+    
+    private int value;
+
+    public CongruentMethod(int seed) {
+        this.value = seed;
     }
     
-    // #cycle = 1
-//    private static final int multiplicand = 0x12345678;
-//    private static final int addend = 0x23456789;
+    public int next() {
+        // int cast は mod 2**32
+        this.value = (int) ((long) value * MULTIPLICAND + ADDEND);
+        return value;
+    }
 
-    private static final int MULTIPLICAND = 3;
-    private static final int ADDEND = 4;
-    
-    public static int next(int seed) {
-        // int cast って mod 2**32?
-        return (int) ((long) seed * MULTIPLICAND + ADDEND);
+    /*
+    public static void main(String[] args) {
+        CongruentMethod cm = new CongruentMethod(0);
+        int previous = cm.value;
+        for (int i = 0; i < 1000; ++i) {
+            int current = cm.next();
+            System.out.println((previous & 0b1111) + " " + (current & 0b1111));
+//            System.out.println(previous + " " + current);
+            previous = current;
+        }
+    } */
+
+    public static void main(String[] args) {
+        CongruentMethod cm = new CongruentMethod(0);
+        System.out.println(0);
+        for (int i = 1; i < 1000; ++i) {
+            System.out.println(cm.next());
+        }
     }
 }
